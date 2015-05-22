@@ -1,0 +1,1 @@
+Phoca Cart Product Module is Joomla! CMS extension. Module which displays Phoca Cart products in module position.
