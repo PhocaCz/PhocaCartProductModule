@@ -1,4 +1,11 @@
-<?php // no direct access
+<?php
+/* @package Joomla
+ * @copyright Copyright (C) Open Source Matters. All rights reserved.
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL, see LICENSE.php
+ * @extension Phoca Extension
+ * @copyright Copyright (C) Jan Pavelka www.phoca.cz
+ * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
+ */
 defined('_JEXEC') or die('Restricted access');
 
 $layoutV	= new JLayoutFile('button_product_view', $basePath = JPATH_ROOT .'/components/com_phocacart/layouts');
@@ -34,7 +41,7 @@ if (!empty($products)) {
 		// :L: PRICE
 		$price 				= new PhocaCartPrice;
 		$d					= array();
-		$d['priceitems']	= $price->getPriceItems($v->price, $v->taxrate, $v->taxcalculationtype, $v->taxtitle);
+		$d['priceitems']	= $price->getPriceItems($v->price, $v->taxrate, $v->taxcalculationtype, $v->taxtitle, $v->unit_amount, $v->unit_unit);
 		$d['priceitemsorig']= array();
 		if ($v->price_original != '' && $v->price_original > 0) {
 			$d['priceitemsorig'] = $price->getPriceItems($v->price_original, $v->taxrate, $v->taxcalculationtype);
