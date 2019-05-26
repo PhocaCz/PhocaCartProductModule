@@ -19,9 +19,9 @@ if ($p['module_description'] != '') {
 }
 if (!empty($products)) {
 	foreach ($products as $k => $v) {
-		
+
 		echo '<div class="ph-item-box">';
-		
+
 		echo '<div class="thumbnail ph-thumbnail">';
 
 		$image = PhocacartImage::getThumbnailName($t['pathitem'], $v->image, 'medium');
@@ -32,13 +32,13 @@ if (!empty($products)) {
 			echo ' />';
 		}
 		echo '</a>';
-		
+
 
 		// CAPTION, DESCRIPTION
 		echo '<div class="caption">';
 		echo '<h3>'.$v->title.'</h3>';
-		
-		
+
+
 		// REVIEW - STAR RATING
 		if ((int)$pc['display_star_rating'] > 0) {
 			$d							= array();
@@ -47,16 +47,16 @@ if (!empty($products)) {
 			$d['display_star_rating']	= (int)$pc['display_star_rating'];
 			echo $layoutR->render($d);
 		}
-		
+
 		// Description box will be displayed even no description is set - to set height and have all columns same height
 		echo '<div class="ph-item-desc">';
 		if ($v->description != '' && (int)$p['display_product_description'] > 0) {
 			echo $v->description;
 		}
 		echo '</div>';// end desc
-		
+
 		// :L: PRICE
-		if ($p['hide_price'] != 1) {
+		if ($this->t['can_display_price']) {
 			$price 				= new PhocacartPrice;
 			$d					= array();
 			$d['priceitems']	= $price->getPriceItems($v->price, $v->taxid, $v->taxrate, $v->taxcalculationtype, $v->taxtitle, $v->unit_amount, $v->unit_unit, 1, 1, $v->group_price);
@@ -67,24 +67,24 @@ if (!empty($products)) {
 			$d['class']			= 'ph-category-price-box';// we need the same class as category or items view
 			$d['product_id']	= (int)$v->id;
 			$d['typeview']		= 'Module';
-			
+
 			// Display discount price
 			// Move standard prices to new variable (product price -> product discount)
 			$d['priceitemsdiscount']		= $d['priceitems'];
 			$d['discount'] 					= PhocacartDiscountProduct::getProductDiscountPrice($v->id, $d['priceitemsdiscount']);
-			
+
 			// Display cart discount (global discount) in product views - under specific conditions only
 			// Move product discount prices to new variable (product price -> product discount -> product discount cart)
 			$d['priceitemsdiscountcart']	= $d['priceitemsdiscount'];
 			$d['discountcart']				= PhocacartDiscountCart::getCartDiscountPriceForProduct($v->id, $v->catid, $d['priceitemsdiscountcart']);
-			
+
 			$d['zero_price']		= 1;// Apply zero price if possible
 			echo $layoutP->render($d);
 		}
-		
+
 		// VIEW PRODUCT BUTTON
 		echo '<div class="ph-category-add-to-cart-box">';
-		
+
 		// :L: LINK TO PRODUCT VIEW
 		if ((int)$p['display_view_product_button'] > 0) {
 			$d									= array();
@@ -92,14 +92,14 @@ if (!empty($products)) {
 			$d['display_view_product_button'] 	= $p['display_view_product_button'];
 			echo $layoutV->render($d);
 		}
-	
-		
+
+
 		echo '</div>';// end add to cart box
 		echo '<div class="clearfix"></div>';
 
-		
+
 		echo '</div>';// end caption
-		
+
 		echo '</div>';// end thumbnail
 		echo '</div>';// end ph-item-box
 	}

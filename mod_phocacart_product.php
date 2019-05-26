@@ -6,7 +6,7 @@
  * @copyright Copyright (C) Jan Pavelka www.phoca.cz
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
- 
+
 defined('_JEXEC') or die;// no direct access
 
 if (!JComponentHelper::isEnabled('com_phocacart', true)) {
@@ -48,6 +48,13 @@ $p['featured_only']					= $params->get( 'featured_only', 0 );
 
 $p['display_product_description']	= $params->get( 'display_product_description', 0 );
 $p['module_description']			= $params->get( 'module_description', '' );
+
+
+$rights							= new PhocacartAccessRights();
+$this->t['can_display_price']	= $rights->canDisplayPrice();
+if ($p['hide_price'] == 1) {
+    $this->t['can_display_price'] = false;// override the component rights
+}
 
 $moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
 
