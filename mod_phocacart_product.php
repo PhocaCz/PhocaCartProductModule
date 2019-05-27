@@ -51,9 +51,9 @@ $p['module_description']			= $params->get( 'module_description', '' );
 
 
 $rights							= new PhocacartAccessRights();
-$this->t['can_display_price']	= $rights->canDisplayPrice();
+$p['can_display_price']	= $rights->canDisplayPrice();
 if ($p['hide_price'] == 1) {
-    $this->t['can_display_price'] = false;// override the component rights
+    $p['can_display_price'] = false;// override the component rights
 }
 
 $moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
