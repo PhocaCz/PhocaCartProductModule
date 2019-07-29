@@ -36,7 +36,11 @@ phocacartimport('phocacart.image.image');*/
 $lang = JFactory::getLanguage();
 //$lang->load('com_phocacart.sys');
 $lang->load('com_phocacart');
-JHTML::stylesheet('media/com_phocacart/css/main.css' );
+$media = new PhocacartRenderMedia();
+$media->loadBase();
+$media->loadBootstrap();
+$media->loadSpec();
+$s = PhocacartRenderStyle::getStyles();
 
 $p['item_ordering']					= $params->get( 'item_ordering', 1 );
 $p['item_limit']					= $params->get( 'item_limit', 1 );
