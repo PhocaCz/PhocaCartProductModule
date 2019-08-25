@@ -61,6 +61,7 @@ if (!empty($products)) {
 			$price 				= new PhocacartPrice;
 			$d					= array();
 			$d['s']             = $s;
+			$d['type']			= $v->type;// PRODUCTTYPE
 			$d['priceitems']	= $price->getPriceItems($v->price, $v->taxid, $v->taxrate, $v->taxcalculationtype, $v->taxtitle, $v->unit_amount, $v->unit_unit, 1, 1, $v->group_price);
 			$d['priceitemsorig']= array();
 			if ($v->price_original != '' && $v->price_original > 0) {

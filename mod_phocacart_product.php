@@ -17,30 +17,9 @@ if (!JComponentHelper::isEnabled('com_phocacart', true)) {
 
 JLoader::registerPrefix('Phocacart', JPATH_ADMINISTRATOR . '/components/com_phocacart/libraries/phocacart');
 
-/*
-if (! class_exists('PhocacartLoader')) {
-    require_once( JPATH_ADMINISTRATOR.'/components/com_phocacart/libraries/loader.php');
-}
 
-phocacartimport('phocacart.utils.settings');
-phocacartimport('phocacart.filter.filter');
-phocacartimport('phocacart.path.path');
-phocacartimport('phocacart.path.route');
-phocacartimport('phocacart.price.price');
-phocacartimport('phocacart.currency.currency');
-phocacartimport('phocacart.product.product');
-phocacartimport('phocacart.image.image');*/
-
-
-
-$lang = JFactory::getLanguage();
-//$lang->load('com_phocacart.sys');
-$lang->load('com_phocacart');
-$media = new PhocacartRenderMedia();
-$media->loadBase();
-$media->loadBootstrap();
-$media->loadSpec();
-$s = PhocacartRenderStyle::getStyles();
+$p									= array();
+$p['load_component_media']			= $params->get( 'load_component_media', 1 );
 
 $p['item_ordering']					= $params->get( 'item_ordering', 1 );
 $p['item_limit']					= $params->get( 'item_limit', 1 );
@@ -54,6 +33,25 @@ $p['display_product_description']	= $params->get( 'display_product_description',
 $p['module_description']			= $params->get( 'module_description', '' );
 
 
+
+$lang = JFactory::getLanguage();
+//$lang->load('com_phocacart.sys');
+$lang->load('com_phocacart');
+
+$s = PhocacartRenderStyle::getStyles();
+
+if ($p['load_component_media'] == 1) {
+	$media = new PhocacartRenderMedia();
+	$media->loadBase();
+	$media->loadBootstrap();
+	$media->loadSpec();
+} else {
+
+}
+
+
+
+
 $rights							= new PhocacartAccessRights();
 $p['can_display_price']	= $rights->canDisplayPrice();
 if ($p['hide_price'] == 1) {
@@ -62,7 +60,7 @@ if ($p['hide_price'] == 1) {
 
 $moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
 
-$pCom								= JComponentHelper::getParams( 'com_phocacart' );
+$pCom								= PhocacartUtils::getComponentParameters();
 $pc['display_star_rating']			= $pCom->get( 'display_star_rating', 0 );
 
 // TO DO - the following function can check publish, stock, price - this can be added to the parameters
