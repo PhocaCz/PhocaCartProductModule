@@ -26,6 +26,8 @@ Phoca Cart Product Module - a Joomla! CMS module which displays Phoca Cart produ
 
 
 
+
+
 ## Support
 
 [Phoca Forum](https://www.phoca.cz/forum)
@@ -54,7 +56,7 @@ Phoca Cart Product Module - a Joomla! CMS module which displays Phoca Cart produ
 
 ## Version
 
-3.4.0
+3.5.0
 
 
 

@@ -38,15 +38,13 @@ $lang = JFactory::getLanguage();
 //$lang->load('com_phocacart.sys');
 $lang->load('com_phocacart');
 
+$media = PhocacartRenderMedia::getInstance('main');
 $s = PhocacartRenderStyle::getStyles();
 
 if ($p['load_component_media'] == 1) {
-	$media = new PhocacartRenderMedia();
 	$media->loadBase();
 	$media->loadBootstrap();
 	$media->loadSpec();
-} else {
-
 }
 
 
@@ -62,6 +60,15 @@ $moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_CO
 
 $pCom								= PhocacartUtils::getComponentParameters();
 $pc['display_star_rating']			= $pCom->get( 'display_star_rating', 0 );
+
+$t['switch_image_category_items']	= $pCom->get( 'switch_image_category_items', 0 );
+$t['image_width_cat']				= $pCom->get( 'image_width_cat', '' );
+$t['image_height_cat']				= $pCom->get( 'image_height_cat', '' );
+$t['lazy_load_category_items']		= $pCom->get( 'lazy_load_category_items', 0 );
+$t['medium_image_width']			= $pCom->get( 'medium_image_width', 300 );
+$t['medium_image_height']			= $pCom->get( 'medium_image_height', 200 );
+$t['display_webp_images']			= $pCom->get( 'display_webp_images', 0 );
+
 
 // TO DO - the following function can check publish, stock, price - this can be added to the parameters
 $products			= PhocacartProduct::getProducts(0, $p['item_limit'], $p['item_ordering'], 0, true, false, false, 0, $p['catid_multiple'], $p['featured_only']);

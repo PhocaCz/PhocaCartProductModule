@@ -11,6 +11,7 @@ defined('_JEXEC') or die;
 $layoutV	= new JLayoutFile('button_product_view', null, array('component' => 'com_phocacart'));
 $layoutP	= new JLayoutFile('product_price', null, array('component' => 'com_phocacart'));
 $layoutR	= new JLayoutFile('product_rating', null, array('component' => 'com_phocacart'));
+$layoutI	= new JLayoutFile('product_image', null, array('component' => 'com_phocacart'));
 
 echo '<div class="ph-product-module-box '.$moduleclass_sfx .'">';
 
@@ -24,13 +25,34 @@ if (!empty($products)) {
 
 		echo '<div class="'.$s['c']['thumbnail'].' ph-thumbnail">';
 
-		$image = PhocacartImage::getThumbnailName($t['pathitem'], $v->image, 'medium');
+		//$image = PhocacartImage::getThumbnailName($t['pathitem'], $v->image, 'medium');
+		if (!isset($v->additional_image)) { $v->additional_image = '';}
+		$lt = '';
+		$attributesOptions = array();
+
+
+		$image = PhocacartImage::getImageDisplay($v->image, $v->additional_image, $t['pathitem'], $t['switch_image_category_items'], $t['image_width_cat'], $t['image_height_cat'], '', $lt, $attributesOptions);
 		$link = JRoute::_(PhocacartRoute::getItemRoute($v->id, $v->catid, $v->alias, $v->catalias));
-		echo '<a href="'.$link.'">';
+		/*echo '<a href="'.$link.'">';
 		if (isset($image->rel) && $image->rel != '') {
 			echo '<img src="'.JURI::base(true).'/'.$image->rel.'" alt="" class="'.$s['c']['img-responsive'].' ph-image"';
 			echo ' />';
 		}
+		echo '</a>';*/
+
+		$dI	= array();
+		if (isset($image['image']->rel) && $image['image']->rel != '') {
+			$dI['t']				= $t;
+			$dI['s']				= $s;
+			$dI['product_id']		= (int)$v->id;
+			$dI['layouttype']		= $lt;
+			$dI['title']			= $v->title;
+			$dI['image']			= $image;
+			$dI['typeview']			= 'Category';
+		}
+		// :L: IMAGE
+		echo '<a href="'.$link.'">';
+		if (!empty($dI)) { echo $layoutI->render($dI);}
 		echo '</a>';
 
 
