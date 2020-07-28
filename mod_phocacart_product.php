@@ -38,10 +38,10 @@ $lang = JFactory::getLanguage();
 //$lang->load('com_phocacart.sys');
 $lang->load('com_phocacart');
 
-$media = PhocacartRenderMedia::getInstance('main');
-$s = PhocacartRenderStyle::getStyles();
 
+$s = PhocacartRenderStyle::getStyles();
 if ($p['load_component_media'] == 1) {
+	$media = PhocacartRenderMedia::getInstance('main');
 	$media->loadBase();
 	$media->loadBootstrap();
 	$media->loadSpec();
