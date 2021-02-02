@@ -75,5 +75,5 @@ $products			= PhocacartProduct::getProducts(0, $p['item_limit'], $p['item_orderi
 $t['pathitem'] 		= PhocacartPath::getPath('productimage');
 
 
-require(JModuleHelper::getLayoutPath('mod_phocacart_product'));
+require(JModuleHelper::getLayoutPath('mod_phocacart_product', $params->get('layout', 'default')));
 ?>

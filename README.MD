@@ -2,7 +2,7 @@
 
 
 
-![Phoca Cart Product Module](https://github.com/PhocaCz/PhocaCartProductModule/blob/master/mod_phocacart_product.png)
+![Phoca Cart Product Module](https://github.com/PhocaCz/PhocaCartProductModule/blob/master/mod_phocacart_product.png?raw=true)
 
 # Phoca Cart Product Module
 
@@ -56,7 +56,7 @@ Phoca Cart Product Module - a Joomla! CMS module which displays Phoca Cart produ
 
 ## Version
 
-3.5.4
+3.5.5
 
 
 
