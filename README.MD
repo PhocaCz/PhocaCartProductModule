@@ -54,13 +54,13 @@ Phoca Cart Product Module - a Joomla! CMS module which displays Phoca Cart produ
 
 
 
+## Version (Joomla! 3.x)
 
+3.5.8
 
+## Version (Joomla! 4.x)
 
-
-## Version
-
-3.5.7
+4.0.0
 
 
 
