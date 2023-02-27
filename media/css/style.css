@@ -1,0 +1,21 @@
+.ph-product-module-item-box {
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.ph-product-module-item-box-image {
+    padding: 1em;
+}
+
+.ph-product-module-item-box-image,
+.ph-product-module-item-box-content {
+    padding: 0.5em;
+}
+
+.ph-product-module-item-box-image img{
+   max-width: 4rem;
+   margin: 0.5rem;
+   height: auto;
+}

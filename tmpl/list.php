@@ -6,12 +6,19 @@
  * @copyright Copyright (C) Jan Pavelka www.phoca.cz
  * @license http://www.gnu.org/copyleft/gpl.html GNU/GPL
  */
+
+use Joomla\CMS\Factory;
+
 defined('_JEXEC') or die;
 
 $layoutV	= new JLayoutFile('button_product_view', null, array('component' => 'com_phocacart'));
 $layoutP	= new JLayoutFile('product_price', null, array('component' => 'com_phocacart'));
 $layoutR	= new JLayoutFile('product_rating', null, array('component' => 'com_phocacart'));
 $layoutI	= new JLayoutFile('product_image', null, array('component' => 'com_phocacart'));
+
+$app = Factory::getApplication();
+$wa = $app->getDocument()->getWebAssetManager();
+$wa->registerAndUseStyle('mod_phocacart_product', 'media/mod_phocacart_product/css/style.css', array('version' => 'auto'));
 
 echo '<div class="ph-product-module-box '.$moduleclass_sfx .'">';
 
@@ -21,17 +28,19 @@ if ($p['module_description'] != '') {
 if (!empty($products)) {
 	foreach ($products as $k => $v) {
 
-		echo '<div class="ph-item-box">';
+		echo '<div class="ph-item-box ph-product-module-item-box">';
+
+		echo '<div class="ph-product-module-item-box-image">';
 
 		echo '<div class="'.$s['c']['thumbnail'].' ph-thumbnail">';
 
 		//$image = PhocacartImage::getThumbnailName($t['pathitem'], $v->image, 'medium');
 		if (!isset($v->additional_image)) { $v->additional_image = '';}
-		$lt = '';
+		$lt = 'list';
 		$attributesOptions = array();
 
 
-		$image = PhocacartImage::getImageDisplay($v->image, $v->additional_image, $t['pathitem'], $t['switch_image_category_items'], $t['image_width_cat'], $t['image_height_cat'], '', $lt, $attributesOptions);
+		$image = PhocacartImage::getImageDisplay($v->image, $v->additional_image, $t['pathitem'], $t['switch_image_category_items'], $t['image_width_cat'], $t['image_height_cat'], 'small', $lt, $attributesOptions);
 		$link = JRoute::_(PhocacartRoute::getItemRoute($v->id, $v->catid, $v->alias, $v->catalias));
 		/*echo '<a href="'.$link.'">';
 		if (isset($image->rel) && $image->rel != '') {
@@ -48,17 +57,26 @@ if (!empty($products)) {
 			$dI['layouttype']		= $lt;
 			$dI['title']			= $v->title;
 			$dI['image']			= $image;
-			$dI['typeview']			= 'Module' . (int)$module->id . 'P';
+			$dI['typeview']			= 'Module' . (int)$module->id . 'P';;
 		}
 		// :L: IMAGE
 		echo '<a href="'.$link.'">';
 		if (!empty($dI)) { echo $layoutI->render($dI);}
 		echo '</a>';
 
+		echo '</div>';// end thumbnail
+
+		echo '</div>';// end ph-product-module-item-box-image
+		echo '<div class="ph-product-module-item-box-content">';
+
 
 		// CAPTION, DESCRIPTION
 		echo '<div class="'.$s['c']['caption'].' ">';
-		echo '<h4>'.$v->title.'</h4>';
+		echo '<h4>';
+		echo '<a href="'.$link.'">';
+		echo $v->title;
+		echo '</a>';
+		echo '</h4>';
 
 
 		// REVIEW - STAR RATING
@@ -91,7 +109,7 @@ if (!empty($products)) {
 			}
 			$d['class']			= 'ph-category-price-box';// we need the same class as category or items view
 			$d['product_id']	= (int)$v->id;
-			$d['typeview']		= 'Module' . (int)$module->id . 'P';;
+			$d['typeview']		= 'Module' . (int)$module->id . 'P';
 
 			// Display discount price
 			// Move standard prices to new variable (product price -> product discount)
@@ -107,6 +125,16 @@ if (!empty($products)) {
 			echo $layoutP->render($d);
 		}
 
+
+		echo '</div>';// end caption
+
+
+
+		echo '</div>';// end ph-product-module-item-box-content
+
+
+		echo '<div class="ph-product-module-item-box-action">';
+
 		// VIEW PRODUCT BUTTON
 		echo '<div class="ph-category-add-to-cart-box">';
 
@@ -118,15 +146,11 @@ if (!empty($products)) {
 			$d['display_view_product_button'] 	= $p['display_view_product_button'];
 			echo $layoutV->render($d);
 		}
-
-
 		echo '</div>';// end add to cart box
-		echo '<div class="ph-cb"></div>';
+		//echo '<div class="ph-cb"></div>';
 
+		echo '</div>';// end ph-product-module-item-box-action
 
-		echo '</div>';// end caption
-
-		echo '</div>';// end thumbnail
 		echo '</div>';// end ph-item-box
 	}
 }

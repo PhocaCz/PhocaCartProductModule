@@ -56,7 +56,7 @@ if ($p['hide_price'] == 1) {
     $p['can_display_price'] = false;// override the component rights
 }
 
-$moduleclass_sfx 					= htmlspecialchars($params->get('moduleclass_sfx'), ENT_COMPAT, 'UTF-8');
+$moduleclass_sfx 					= htmlspecialchars((string)$params->get('moduleclass_sfx', ''), ENT_COMPAT, 'UTF-8');
 
 $pCom								= PhocacartUtils::getComponentParameters();
 $pc['display_star_rating']			= $pCom->get( 'display_star_rating', 0 );
