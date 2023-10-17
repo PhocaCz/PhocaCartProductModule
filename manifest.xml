@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <updates>
 	<update>
 		<name><![CDATA[ Phoca Cart Product Module ]]></name>
@@ -23,19 +24,20 @@
 		<description><![CDATA[ Phoca Cart Product Module - a Joomla! CMS module which displays Phoca Cart products in module position. ]]></description>
 		<element>mod_phocacart_product</element>
 		<type>module</type>
-		<version>4.0.7</version>
-		<infourl title="Phoca Cart Product Module 4.0.7">https://www.phoca.cz/</infourl>
+		<version>4.0.9</version>
+		<infourl title="Phoca Cart Product Module 4.0.9">https://www.phoca.cz/</infourl>
 		<downloads>
-			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaCartProductModule/releases/download/4.0.7/mod_phocacart_product_v4.0.7.zip</downloadurl>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaCartProductModule/releases/download/4.0.9/mod_phocacart_product_v4.0.9.zip</downloadurl>
 		</downloads>
-		<sha512>64abd1cf05e6462ff77bc7c0965006aadbc3b0a83d16ca306d544205c568058943cb52814f483096908388966c8595b7c10ed2b5b608d30e99792f5d8a3cf3c8</sha512>
+		<sha512>858034cc64267c2b7ae1aac3cb1e46f1d1b3dc704b70220171b54823fa0719f1bc07d1168c22f736d9c669610da7f2f6a343b11bb7b8557694470ffa59cebca8</sha512>
 		<tags>
 			<tag>stable</tag>
 		</tags>
 		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
 		<maintainerurl>https://www.phoca.cz/</maintainerurl>
 		<section>Updates</section>
-		<targetplatform name="joomla" version="4.[012]"/>
+		<targetplatform name="joomla" version="4\.*"/>
 		<client>site</client>
 	</update>
+
 </updates>

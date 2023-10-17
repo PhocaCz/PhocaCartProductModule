@@ -8,13 +8,15 @@
  */
 
 use Joomla\CMS\Factory;
+use Joomla\CMS\Layout\FileLayout;
+use Joomla\CMS\Router\Route;
 
 defined('_JEXEC') or die;
 
-$layoutV	= new JLayoutFile('button_product_view', null, array('component' => 'com_phocacart'));
-$layoutP	= new JLayoutFile('product_price', null, array('component' => 'com_phocacart'));
-$layoutR	= new JLayoutFile('product_rating', null, array('component' => 'com_phocacart'));
-$layoutI	= new JLayoutFile('product_image', null, array('component' => 'com_phocacart'));
+$layoutV	= new FileLayout('button_product_view', null, array('component' => 'com_phocacart'));
+$layoutP	= new FileLayout('product_price', null, array('component' => 'com_phocacart'));
+$layoutR	= new FileLayout('product_rating', null, array('component' => 'com_phocacart'));
+$layoutI	= new FileLayout('product_image', null, array('component' => 'com_phocacart'));
 
 $app = Factory::getApplication();
 $wa = $app->getDocument()->getWebAssetManager();
@@ -41,10 +43,10 @@ if (!empty($products)) {
 
 
 		$image = PhocacartImage::getImageDisplay($v->image, $v->additional_image, $t['pathitem'], $t['switch_image_category_items'], $t['image_width_cat'], $t['image_height_cat'], 'small', $lt, $attributesOptions);
-		$link = JRoute::_(PhocacartRoute::getItemRoute($v->id, $v->catid, $v->alias, $v->catalias));
+		$link = Route::_(PhocacartRoute::getItemRoute($v->id, $v->catid, $v->alias, $v->catalias));
 		/*echo '<a href="'.$link.'">';
 		if (isset($image->rel) && $image->rel != '') {
-			echo '<img src="'.JURI::base(true).'/'.$image->rel.'" alt="" class="'.$s['c']['img-responsive'].' ph-image"';
+			echo '<img src="'.URI::base(true).'/'.$image->rel.'" alt="" class="'.$s['c']['img-responsive'].' ph-image"';
 			echo ' />';
 		}
 		echo '</a>';*/
